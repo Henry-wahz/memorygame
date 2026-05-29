@@ -91,7 +91,11 @@ function startGame() {
 
         score++;
         scoreSpan.textContent = score;
+
+        winSound.pause();
+        winSound.currentTime = 0;
         winSound.play();
+
         if (score === 6) {
 
             let message = "";
@@ -138,6 +142,8 @@ function startGame() {
 
     } else {
         isBoardLocked = true;
+        loseSound.pause();
+        loseSound.currentTime = 0;
         loseSound.play();
         setTimeout(() => {
             firstPick.classList.remove("active")
@@ -168,14 +174,14 @@ function reStart() {
     scoreSpan.textContent = "0"
     showMessageBox.innerHTML = "";
     startBtn.textContent = "Start"
-
+    startBtn.style.backgroundColor = "#029642"
 
 
     box.style.display = "grid";
     box.innerHTML = " ";
     shuffleImage(totalImages)
     showGamebox()
-    previewCard();
+
 
 
 
@@ -221,18 +227,22 @@ startBtn.style.fontSize = "20px"
 startBtn.addEventListener("click", () => {
 
     if (startBtn.textContent === "Start") {
+        previewCard();
         startBtn.textContent = "Stop";
-        startBtn.style.color = "white";
+
         startBtn.style.backgroundColor = "#b22222"
-        startBtn.style.border = "none";
-        startBtn.style.padding = "5px 20px 5px 20px"
-        startBtn.style.fontFamily = "monospace"
-        startBtn.style.fontSize = "20px"
+
+
+        startSound.pause();
+        startSound.currentTime = 0;
         startSound.play();
+        isBoardLocked = false;
+        startTimer();
+
+    } else {
+        reStart();
     }
 
-    isBoardLocked = false;
-    startTimer();
 
 
 })
@@ -247,5 +257,5 @@ startBtn.addEventListener("click", () => {
 
 
 showGamebox();
-previewCard();
+
 
