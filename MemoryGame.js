@@ -92,7 +92,7 @@ function startGame() {
         score++;
         scoreSpan.textContent = score;
         winSound.play();
-        if (score === 1) {
+        if (score === 6) {
 
             let message = "";
             const time = `${minutes} : ${seconds < 10 ? "0" + seconds : seconds}`;
